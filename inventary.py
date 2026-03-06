@@ -1,5 +1,3 @@
-
-
 # List to store product names
 products = []
 
@@ -9,7 +7,7 @@ categories = ("Electronics", "Clothing", "Food", "Stationery")
 # Set to store unique suppliers
 suppliers = set()
 
-# Dictionary to store product and quantity
+# Dictionary to store product details
 inventory = {}
 
 
@@ -19,11 +17,16 @@ def add_product():
     """
     name = input("Enter product name: ")
     quantity = int(input("Enter quantity: "))
+    price = float(input("Enter product price: "))
     supplier = input("Enter supplier name: ")
 
     products.append(name)
     suppliers.add(supplier)
-    inventory[name] = quantity
+
+    inventory[name] = {
+        "quantity": quantity,
+        "price": price
+    }
 
     print("Product added successfully.")
 
@@ -42,14 +45,17 @@ def view_products():
 
 def view_inventory():
     """
-    Display products with their quantities.
+    Display products with their quantity and price.
     """
     if len(inventory) == 0:
         print("Inventory is empty.")
     else:
         print("Inventory Details:")
-        for product, qty in inventory.items():
-            print(product, ":", qty)
+        for product, details in inventory.items():
+            print(product)
+            print("Quantity:", details["quantity"])
+            print("Price:", details["price"])
+            print()
 
 
 def view_suppliers():
